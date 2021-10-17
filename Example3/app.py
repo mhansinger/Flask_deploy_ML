@@ -18,17 +18,17 @@ app = Flask(__name__)
 
 # Create test dataset
 rng1 = np.random.RandomState(0)
-rng2 = np.random.RandomState(0)
+rng2 = np.random.RandomState(1)
 X_train = np.linspace(0, 6, 100)[:, np.newaxis]
 y_train = np.sin(X_train).ravel() + np.sin(6 * X_train).ravel() + rng1.normal(0, 0.1, X_train.shape[0])
 X_test = np.linspace(0, 6, 100)[:, np.newaxis]
-y_test = np.sin(X_test).ravel() + np.sin(6 * X_test).ravel() + rng2.normal(0, 0.2, X_test.shape[0])
+y_test = np.sin(X_test).ravel() + np.sin(6 * X_test).ravel() + rng2.normal(0, 0.1, X_test.shape[0])
 
 
 def load_models():
     # load pretrained models: sklearn lib is not needed!
-    model1 = joblib.load('regr_1.mdl')
-    model2 = joblib.load('regr_2.mdl')
+    model1 = joblib.load('models/regr_1.mdl')
+    model2 = joblib.load('models/regr_2.mdl')
 
     return model1, model2
 
@@ -113,8 +113,8 @@ def retrain_model():
     regr_2.fit(X_train, y_train)
 
     # serialize model
-    joblib.dump(regr_1, 'regr_1.mdl')
-    joblib.dump(regr_2, 'regr_2.mdl')
+    joblib.dump(regr_1, 'models/regr_1.mdl')
+    joblib.dump(regr_2, 'models/regr_2.mdl')
 
     return {'Success retrain': True}
 

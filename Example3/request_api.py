@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # get_prediction()
     get_mse()
     body_dict = {
-        "max_depth": 5,
+        "max_depth": 7,
         "n_estimators": 50,
     }
     post_retrain(body_dict)
